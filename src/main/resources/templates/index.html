@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Empleados</title>
+
+<!-- CSS -->
+<link href="../static/css/bootstrap.css"  rel="stylesheet" th:href="@{/css/bootstrap.css}">
+
+</head>
+<body>
+	<div class="Container">
+		<br>
+		<div th:switch="${list}">
+			<h2 th:if="${list.isEmpty()}">No hay Empleados</h2>
+			<div th:if="${!list.isEmpty()}">
+				<h2>Empleados</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Salario</th>
+							<th>Fecha vinculacion</th>
+							<th>Estado Vinculacion</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="employee : ${list}">
+						    <td th:text="${employee.name}" />
+							<td th:text="${employee.salary}" />
+							<td th:text="${employee.bonding}" />
+							<td th:text="${employee.state}" />
+							<td> <a th:href="@{/save/{id} (id=${employee.id})}">Editar</a></td>
+							<td> <a th:href="@{/delete/{id} (id=${employee.id})}">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<div>
+	</div>
+		<a href="/save/0" class="btn btn-success">Agregar</a>
+	</div>
+</body>
+</html>
